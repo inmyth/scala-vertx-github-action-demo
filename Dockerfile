@@ -1,4 +1,4 @@
-FROM hirokimatsumoto/alpine-openjdk-11
+FROM hirokimatsumoto/alpine-openjdk-11 AS builder
 ARG project=scala-vertx-action-demo
 ENV SBT_VERSION 1.3.8
 ENV SCALA_VERSION 2.12.10
@@ -38,5 +38,13 @@ COPY . app/
 
 WORKDIR /app
 
-CMD sbt run
+RUN sbt assembly
+
+FROM adoptopenjdk/openjdk11:alpine-slim
+
+WORKDIR /usr/local
+
+COPY --from=builder /project/target/scala-2.12/scala-vertx-github-action-demo-assembly-0.1.jar ./
+
+CMD java -jar ./scala-vertx-github-action-demo-assembly-0.1.jar
 
