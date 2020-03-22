@@ -44,7 +44,7 @@ FROM adoptopenjdk/openjdk11:alpine-slim
 
 WORKDIR /usr/local
 
-COPY --from=builder /project/target/scala-2.12/scala-vertx-github-action-demo-assembly-0.1.jar ./
+COPY --from=builder /app/target/scala-2.12/scala-vertx-github-action-demo-assembly-0.1.jar ./
 
 CMD java -jar ./scala-vertx-github-action-demo-assembly-0.1.jar
 
