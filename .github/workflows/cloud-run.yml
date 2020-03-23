@@ -15,9 +15,8 @@
 name: Build and Deploy to Cloud Run
 
 on:
-  push:
-    branches:
-      - master
+  repository_dispatch:
+    types: [my-event]
 
 # Environment variables available to all jobs and steps in this workflow
 env:
